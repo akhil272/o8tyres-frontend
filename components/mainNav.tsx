@@ -29,13 +29,15 @@ export function MainNav({
     },
   ];
   return (
-    <nav className={cn("flex items-center space-x-4 lg:space-x-10", className)}>
+    <nav
+      className={cn("flex items-center  space-x-4 lg:space-x-32", className)}
+    >
       {routes.map((route) => (
         <Link
           href={route.href}
           className={
-            (cn("text-sm font-medium transition-colors hover:text-primary "),
-            route.active ? "text-white border-b-2 py-2" : "text-white")
+            (cn("transition-all hover:text-primary "),
+            route.active ? " text-white border-b-2 py-2" : "text-white")
           }
           key={route.href}
         >
