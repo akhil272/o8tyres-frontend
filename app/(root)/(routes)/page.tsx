@@ -21,7 +21,38 @@ const tyreSizes = [
 const carModels = [
   { label: "Tata Sumo", value: "Tata Sumo" },
   { label: "Chevrolet Tavera", value: "Chevrolet Tavera" },
-  { label: "Honda Accord", value: "Honda Accord" },
+  {
+    label: "Honda Amaze 2013",
+    value: "Honda Amaze",
+  },
+  {
+    label: "Honda City 1996",
+    value: "Honda City",
+  },
+  {
+    label: "Honda City Hybrid eHEV 2020",
+    value: "Honda City Hybrid eHEV",
+  },
+  {
+    label: "Honda Elevate 2023",
+    value: "Honda Elevate",
+  },
+  {
+    label: "Honda WR-V 2017",
+    value: "Honda WR-V",
+  },
+  {
+    label: "Honda Civic 1972",
+    value: "Honda Civic",
+  },
+  {
+    label: "Honda CR-V 1995",
+    value: "Honda CR-V",
+  },
+  {
+    label: "Honda Accord Hybrid 1976",
+    value: "Honda Accord Hybrid",
+  },
   { label: "Toyota Innova", value: "Toyota Innova" },
   { label: "Maruti Gypsy king", value: "Maruti Gypsy king" },
   { label: "Toyota Corolla", value: "Toyota Corolla" },
@@ -37,6 +68,12 @@ const HomePage = () => {
   const router = useRouter();
   const onClickContinue = () => {
     router.push(`/products/search?query=${searchTerm}`);
+  };
+  const onClickCall = () => {
+    window.location.href = "tel:+919745222566";
+  };
+  const onClickWhatsApp = () => {
+    window.open("https://wa.me/+919745222566", "_blank");
   };
   return (
     <div>
@@ -74,10 +111,14 @@ const HomePage = () => {
                 <Button variant="link">Assistant </Button>
               </div>
               <div>
-                <Button variant="link">Call </Button>
+                <Button onClick={onClickCall} variant="link">
+                  Call
+                </Button>
               </div>
               <div>
-                <Button variant="link">WhatsApp Message </Button>
+                <Button onClick={onClickWhatsApp} variant="link">
+                  WhatsApp Message
+                </Button>
               </div>
             </div>
           </div>

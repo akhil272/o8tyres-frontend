@@ -15,15 +15,15 @@ const Navbar = () => {
     router.push("/");
   };
   return (
-    <div className="bg-primary md:flex hidden items-center md:px-8 px-2 md:h-28 h-20">
+    <div className="bg-primary md:flex hidden items-center md:px-8 px-2 md:h-24 h-20">
       <div className="flex items-center w-full">
         <h2
           onClick={handleLogoClick}
-          className="text-white text-3xl w-1/2 font-semibold "
+          className="text-white text-3xl w-1/4 lg:w-1/2 font-semibold "
         >
           O8 TYRES
         </h2>
-        <div className="space-x-2 hidden md:flex w-1/2">
+        <div className="space-x-2 hidden md:flex w-3/4 lg:w-1/2">
           <div className="px-4 hidden md:flex">
             <MainNav className="text-xl font-semibold" />
           </div>

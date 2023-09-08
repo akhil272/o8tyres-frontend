@@ -39,9 +39,6 @@ export function SearchBar({
 
   const onChange = (event: any) => {
     setUserQuery(event.target.value);
-    if (userQuery.length > 2) {
-      alert(userQuery);
-    }
   };
 
   const onSearch = (searchTerm: string) => {
