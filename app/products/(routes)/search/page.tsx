@@ -1,7 +1,10 @@
-import React from "react";
+"use client";
+import { useSearchParams } from "next/navigation";
 
 const SearchPage = () => {
-  return <div>SearchPage</div>;
+  const searchParams = useSearchParams();
+  const search = searchParams.get("query");
+  return <div>You searched for {search}</div>;
 };
 
 export default SearchPage;
