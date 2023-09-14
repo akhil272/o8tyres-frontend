@@ -1,23 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { Check, ChevronsUpDown } from "lucide-react";
+import { ChangeEvent, useState } from "react";
 
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-} from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 
 interface SearchBarProps {
   data: {
@@ -25,25 +11,39 @@ interface SearchBarProps {
     value: string;
   }[];
   placeholder: string;
-  setSearchTerm: any;
+  enableContactOffline?: boolean;
+  setSearchTerm: (searchTerm: string) => void;
 }
 
 export function SearchBar({
   data,
   placeholder,
+  enableContactOffline = false,
   setSearchTerm,
 }: SearchBarProps) {
-  const [open, setOpen] = useState(false);
+  const [showButtons, setShowButtons] = useState(false);
   const [userQuery, setUserQuery] = useState("");
-  const [suggestions, setSuggestions] = useState();
 
-  const onChange = (event: any) => {
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     setUserQuery(event.target.value);
+    const termExists = data.some((item) =>
+      item.label.toLowerCase().includes(userQuery.toLowerCase())
+    );
+    setShowButtons(!termExists);
   };
 
   const onSearch = (searchTerm: string) => {
     setUserQuery(searchTerm);
     setSearchTerm(searchTerm);
+  };
+
+  const handleWhatsAppClick = () => {
+    const message = "Hi team, I am looking for tyre size ";
+    const searchQuery = encodeURIComponent(message + userQuery);
+    window.open(`https://wa.me/+919745222566?text=${searchQuery}`, "_blank");
+  };
+  const handleCallClick = () => {
+    window.location.href = "tel:+919745222566";
   };
 
   return (
@@ -55,6 +55,22 @@ export function SearchBar({
         onChange={onChange}
         placeholder={`Enter ${placeholder}...`}
       />
+      {enableContactOffline && showButtons && (
+        <div className="flex-col">
+          <p className="text-red-500 px-4 pt-2">
+            Not available online but do kindly reach us out, we can get you if
+            its in market.{" "}
+          </p>
+          <div className="flex">
+            <Button variant={"link"} onClick={handleCallClick}>
+              Call
+            </Button>
+            <Button variant={"link"} onClick={handleWhatsAppClick}>
+              WhatsApp
+            </Button>
+          </div>
+        </div>
+      )}
       <div>
         {data
           .filter((item) => {

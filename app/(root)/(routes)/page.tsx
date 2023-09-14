@@ -98,6 +98,7 @@ const HomePage = () => {
             <SearchBar
               data={tyreSizes}
               placeholder="tyre size"
+              enableContactOffline={true}
               setSearchTerm={setSearchTerm}
             />
             <Button onClick={onClickContinue} className="mt-4">
