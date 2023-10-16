@@ -1,4 +1,5 @@
 "use client";
+import BrandHomeCard from "@/components/brandHomeCard";
 import { SearchBar } from "@/components/searchBar";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -123,6 +124,20 @@ const HomePage = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="w-full py-4 bg-primary-foreground space-y-10 ">
+        <div className="flex w-full justify-center space-x-10 ">
+          <BrandHomeCard />
+          <BrandHomeCard />
+          <BrandHomeCard />
+          <BrandHomeCard />
+        </div>
+        <div className="flex w-full justify-center space-x-10 ">
+          <BrandHomeCard />
+          <BrandHomeCard />
+          <BrandHomeCard />
+          <BrandHomeCard />
         </div>
       </div>
     </div>

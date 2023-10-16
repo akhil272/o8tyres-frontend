@@ -46,12 +46,12 @@ const Navbar = () => {
   return (
     <nav className="w-full bg-primary text-primary-foreground py-4 md:px-16 px-4">
       <div className="flex md:flex-row flex-col justify-between ">
-        <div className="w-full md:w-auto">
+        <div className="w-full lg:w-auto">
           <div className="flex px-6 items-center justify-between">
             <Link href="/">
               <h1 className="text-4xl font-semibold">OOZE</h1>
             </Link>
-            <div onClick={() => setOpen(!open)} className="md:hidden">
+            <div onClick={() => setOpen(!open)} className="lg:hidden">
               {open ? <X /> : <Menu />}
             </div>
           </div>
