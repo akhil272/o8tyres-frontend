@@ -1,44 +1,92 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
 import { redirect, useRouter } from "next/navigation";
-import { MainNav } from "./mainNav";
 import { Button } from "./ui/button";
+
+import { Menu, ShoppingCart, X } from "lucide-react";
+import Link from "next/link";
+import { useParams, usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 import MobileNav from "./mobileNav";
 
 const Navbar = () => {
   const router = useRouter();
+  const pathname = usePathname();
+  const params = useParams();
+  const [open, setOpen] = useState(false);
   const handleSignInBtnClick = () => {
     router.push("/sign-in");
   };
   const handleLogoClick = () => {
     router.push("/");
   };
+  const routes = [
+    {
+      href: `/`,
+      label: "Home",
+      active: pathname === `/`,
+    },
+    {
+      href: `/offers`,
+      label: "Offers",
+      active: pathname === `/offers`,
+    },
+    {
+      href: `/about`,
+      label: "About",
+      active: pathname === `/about`,
+    },
+    {
+      href: `/contact`,
+      label: "Contact",
+      active: pathname === `/contact`,
+    },
+  ];
   return (
-    <div className="bg-primary md:flex hidden items-center md:px-8 px-2 md:h-24 h-20">
-      <div className="flex items-center w-full">
-        <h2
-          onClick={handleLogoClick}
-          className="text-white text-3xl w-1/4 lg:w-1/2 font-semibold "
-        >
-          O8 TYRES
-        </h2>
-        <div className="space-x-2 hidden md:flex w-3/4 lg:w-1/2">
-          <div className="px-4 hidden md:flex">
-            <MainNav className="text-xl font-semibold" />
+    <nav className="w-full bg-primary text-primary-foreground py-4 md:px-16 px-4">
+      <div className="flex md:flex-row flex-col justify-between ">
+        <div className="w-full md:w-auto">
+          <div className="flex px-6 items-center justify-between">
+            <Link href="/">
+              <h1 className="text-4xl font-semibold">OOZE</h1>
+            </Link>
+            <div onClick={() => setOpen(!open)} className="md:hidden">
+              {open ? <X /> : <Menu />}
+            </div>
           </div>
-          <div className="flex  justify-end w-full">
-            <Button className="font-medium text-xl">Log in</Button>
+          <div className="flex justify-end ">
+            {open && <MobileNav route={routes} open={open} setOpen={setOpen} />}
+          </div>
+        </div>
+        <div className="hidden lg:flex space-x-20 items-center text-xl font-medium">
+          {routes.map((route) => (
+            <Link
+              href={route.href}
+              className={
+                (cn("transition-all"), route.active ? "border-b-2  " : "")
+              }
+              key={route.href}
+            >
+              {route.label}
+            </Link>
+          ))}
+          <div className="flex space-x-4 items-center ">
+            <div onClick={() => router.push("/sign-in")}>Sign In</div>
             <Button
-              onClick={handleSignInBtnClick}
-              className="bg-white font-medium text-xl text-primary  hover:bg-slate-200"
+              onClick={() => router.push("/sign-up")}
+              variant="secondary"
+              className="text-xl"
             >
               Sign Up
             </Button>
           </div>
+          <div onClick={() => router.push("/my-cart")}>
+            <ShoppingCart className="h-10 w-10" />
+          </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 

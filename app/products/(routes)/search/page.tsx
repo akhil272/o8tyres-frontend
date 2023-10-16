@@ -7,7 +7,7 @@ const SearchPage = () => {
   const search = searchParams.get("query");
   return (
     <div>
-      <div className=" flex space-x-8 ">
+      <div className="flex space-x-8 ">
         <div className="hidden lg:flex">
           <div className="font-medium text-2xl flex">
             <div>
