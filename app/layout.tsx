@@ -1,9 +1,9 @@
 import Navbar from "@/components/navbar";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Nunito } from "next/font/google";
 
-const montserrat = Montserrat({ subsets: ["latin"] });
+const nunito = Nunito({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "O8 TYRES",
@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={montserrat.className}>
+      <body className={nunito.className}>
         <Navbar />
         {children}
       </body>

@@ -49,7 +49,7 @@ export function SearchBar({
   return (
     <div>
       <Input
-        className="w-[300px] border "
+        className="bg-secondary border-none "
         type="text"
         value={userQuery}
         onChange={onChange}
@@ -85,7 +85,7 @@ export function SearchBar({
           .slice(0, 5)
           .map((item) => (
             <div
-              className="w-[300px] py-2 px-2 bg-primary-foreground hover:bg-secondary"
+              className="py-2 px-2 bg-secondary hover:bg-primary-foreground"
               onClick={() => onSearch(item.label)}
               key={item.value}
             >
