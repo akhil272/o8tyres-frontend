@@ -1,5 +1,5 @@
 "use client";
-import TyreProductCard from "@/components/tyreProductCard";
+import TyreProductCard from "@/components/TyreProductCard";
 import { useSearchParams } from "next/navigation";
 
 const SearchPage = () => {

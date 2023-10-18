@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import BrandHomeCard from "@/components/brandHomeCard";
-import { SearchBar } from "@/components/searchBar";
+import BrandHomeCard from "@/components/BrandHomeCard";
+import { SearchBar } from "@/components/SearchBar";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -110,7 +110,6 @@ const HomePage = () => {
                 setSearchTerm={setSearchTerm}
               />
             </div>
-
             <Button onClick={onClickContinue} className="w-full xl:w-1/2">
               Continue
             </Button>
@@ -146,75 +145,103 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <div className="flex py-8 bg-secondary">
-        <div className="lg:w-3/4  w-full px-8 lg:px-0 md:flex md:space-x-4 space-y-8 md:space-y-0">
-          <div className="md:w-1/2 md:space-y-4 space-y-2">
-            <BrandHomeCard />
-          </div>
+      <div className="flex justify-center py-8 bg-secondary ">
+        <div className="grid md:grid-cols-3 grid-cols-2 xl:w-3/4    xl:gap-8 gap-4">
+          <BrandHomeCard name="Michelin" logoSrc="michelin-logo.webp" />
+          <BrandHomeCard name="Bridgestone" logoSrc="bridgestone-logo.webp" />
+          <BrandHomeCard name="Pirelli" logoSrc="pirelli-logo.webp" />
+          <BrandHomeCard name="Yokohama" logoSrc="yokohama-logo.webp" />
+          <BrandHomeCard name="Goodyear" logoSrc="goodyear-logo.webp" />
+          <BrandHomeCard name="Continental" logoSrc="continental-logo.webp" />
         </div>
       </div>
-      <div className="flex py-8 flex-col space-y-8 items-center">
-        <h5 className="text-2xl font-medium">How does O8 Tyres Work?</h5>
-        <div className="flex flex-col space-y-10 justify-start w-1/2">
+      <div className="flex justify-center w-full px-8 lg:px-0">
+        <div className="xl:w-3/4 flex py-8 flex-col space-y-12">
           <div>
-            <div className="text-lg font-medium">
-              1. Choose your tyres online
+            <h5 className="text-3xl font-semibold text-center">
+              How does O8 Tyres Work?
+            </h5>
+            <div className="flex flex-col space-y-4 justify-start ">
+              <div>
+                <div className="text-lg font-medium">
+                  1. Choose your tyres online
+                </div>
+                <p>
+                  We stock a wide range of tyres for all vehicle categories and
+                  our dedicated team of experts endeavour to provide our
+                  customers with the latest tyre models. Meaning there should
+                  always be a relevant tyre for you in our catalogue.
+                </p>
+              </div>
+              <div>
+                <div className="text-lg font-medium">
+                  2. Get it shipped at your doorstep or drive into our fitting
+                  partners
+                </div>
+                <p>
+                  Get your tyres shipped at your doorstep or drive into our
+                  fitting partners across India.
+                </p>
+              </div>
+              <div>
+                <div className="text-lg font-medium">
+                  3. Secure online payment
+                </div>
+                <p>
+                  We take your personal data very seriously and ensure that our
+                  system complies with the latest in retail safety protocols –
+                  to safeguard any banking or personal data in our system.
+                </p>
+              </div>
             </div>
-            <p>
-              We stock a wide range of tyres for all vehicle categories and our
-              dedicated team of experts endeavour to provide our customers with
-              the latest tyre models. Meaning there should always be a relevant
-              tyre for you in our catalogue.
-            </p>
           </div>
-          <div>
-            <div className="text-lg font-medium">
-              2. Get it shipped at your doorstep or drive into our fitting
-              partners
+          <div className="w-full">
+            <h5 className="text-3xl font-semibold text-center">Testimonials</h5>
+            <div className="italic">
+              “Online tyre shopping never been this easy. Brilliant service and
+              competitive pricing. Had a great experience with O8 tyres. Would
+              easily recommend this to anyone.”
             </div>
-            <p>
-              Get your tyres shipped at your doorstep or drive into our fitting
-              partners across India.
-            </p>
           </div>
-          <div>
-            <div className="text-lg font-medium">3. Secure online payment</div>
-            <p>
-              We take your personal data very seriously and ensure that our
-              system complies with the latest in retail safety protocols – to
-              safeguard any banking or personal data in our system.
-            </p>
+          <div className="w-full ">
+            <h5 className="text-3xl font-semibold text-center">
+              Frequent Asked Questions
+            </h5>
+            <Accordion className="flex flex-col xl:w-1/5" type="multiple">
+              <AccordionItem value="item-1">
+                <AccordionTrigger>
+                  Which is correct, tyre or tire?
+                </AccordionTrigger>
+                <AccordionContent>
+                  There is no difference between the words "tyres" and "tires."
+                  They are just variations on the spelling of the same word. In
+                  the UK, "tyre" is the standard version used the most. The
+                  alternative version of "tire" is generally more associated
+                  with American English.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2">
+                <AccordionTrigger>
+                  Is it better to buy tyres online?
+                </AccordionTrigger>
+                <AccordionContent>
+                  Yes, many people find it better to buy tyres online. Online
+                  tyre buying offers a wide range of choices, convenient
+                  selection from home, and competitive prices- making it an
+                  appealing option for motorists.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-3">
+                <AccordionTrigger>What tyres do I need?</AccordionTrigger>
+                <AccordionContent>
+                  The type of tyres that you need will depend on the wheel size,
+                  your vehicle type, and the driving conditions. Consult your
+                  vehicle’s handbook or a tyre specialist for guidance.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
-        <h5 className="text-2xl font-medium">Testimonials</h5>
-        <div className="italic">
-          “Online tyre shopping never been this easy. Brilliant service and
-          completive pricing. Had a great experience with O8 tyres. Would easily
-          recommend this to anyone.”
-        </div>
-        <h5 className="text-2xl font-medium">Frequent Asked Questions</h5>
-        <Accordion type="multiple">
-          <AccordionItem value="item-1">
-            <AccordionTrigger>Which is correct, tyre or tire?</AccordionTrigger>
-            <AccordionContent>
-              Yes. It adheres to the WAI-ARIA design pattern.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-2">
-            <AccordionTrigger>
-              Is it better to buy tyres online?
-            </AccordionTrigger>
-            <AccordionContent>
-              Yes. It adheres to the WAI-ARIA design pattern.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-3">
-            <AccordionTrigger>What tyres do I need?</AccordionTrigger>
-            <AccordionContent>
-              Yes. It adheres to the WAI-ARIA design pattern.
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
       </div>
     </div>
   );

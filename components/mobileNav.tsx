@@ -22,13 +22,10 @@ const routes = [
 
 const MobileNav = ({ open, setOpen }: any) => {
   return (
-    <div
-      className=" w-[100svw] h-[100svh] text-xl font-medium "
-      onClick={() => setOpen(!open)}
-    >
-      <div className="flex flex-col h-full justify-between px-6">
-        <ul className="flex items-end flex-col w-full  space-y-8 ">
-          <div className="w-full flex justify-end pt-4 items-end border-b-2">
+    <div className="text-xl font-medium" onClick={() => setOpen(!open)}>
+      <div className="flex flex-col space-y-4 px-2">
+        <ul className="flex items-end flex-col w-full  space-y-4 ">
+          <div className="w-full flex justify-end  items-end border-b-2">
             <h4 className="py-2">
               Hello, <b>Anand</b>
             </h4>

@@ -44,18 +44,18 @@ const Navbar = () => {
     },
   ];
   return (
-    <nav className="w-full bg-primary text-primary-foreground md:py-4 py-2 md:px-16 px-4">
+    <nav className="w-full bg-primary text-primary-foreground md:py-4 py-2 xl:px-16 md:px-8 px-4">
       <div className="flex md:flex-row flex-col justify-between ">
         <div className="w-full lg:w-auto">
-          <div className="flex px-6 items-center justify-between">
+          <div className="flex items-center justify-between">
             <Link href="/">
-              <h1 className="text-4xl font-semibold">OOZE</h1>
+              <h1 className="text-2xl lg:text-4xl font-semibold">O8 TYRES</h1>
             </Link>
             <div onClick={() => setOpen(!open)} className="lg:hidden">
               {open ? <X /> : <Menu />}
             </div>
           </div>
-          <div className="flex justify-end ">
+          <div className=" justify-end ">
             {open && <MobileNav route={routes} open={open} setOpen={setOpen} />}
           </div>
         </div>
