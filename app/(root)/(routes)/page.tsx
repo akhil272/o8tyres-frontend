@@ -11,6 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import UserTestimonialCard from "@/components/UserTestimonialCard";
 
 const tyreSizes = [
   { label: "195/80 R15 89 V", value: "195/80 R15 89 V" },
@@ -87,7 +88,7 @@ const HomePage = () => {
       <div className="lg:h-[640px] h-[320px] w-full relative">
         <Image
           className="object-cover"
-          src="https://img.freepik.com/free-photo/mechanic-changing-tires-car-service_1303-26894.jpg?w=1380&t=st=1692931729~exp=1692932329~hmac=2aac0d26570044e15302ed3ab612ce3f82a780cebd703bf45d98f5f22b7fbf7a"
+          src="/images/o8tyres-cover-image.jpg"
           alt="home-cover"
           fill={true}
         />
@@ -197,27 +198,24 @@ const HomePage = () => {
           </div>
           <div className="w-full">
             <h5 className="text-3xl font-semibold text-center">Testimonials</h5>
-            <div className="italic">
-              “Online tyre shopping never been this easy. Brilliant service and
-              competitive pricing. Had a great experience with O8 tyres. Would
-              easily recommend this to anyone.”
-            </div>
+            <UserTestimonialCard />
           </div>
-          <div className="w-full ">
+          <div>
             <h5 className="text-3xl font-semibold text-center">
               Frequent Asked Questions
             </h5>
-            <Accordion className="flex flex-col xl:w-1/5" type="multiple">
+            <Accordion className="flex flex-col xl:w-2/5" type="multiple">
               <AccordionItem value="item-1">
                 <AccordionTrigger>
                   Which is correct, tyre or tire?
                 </AccordionTrigger>
                 <AccordionContent>
-                  There is no difference between the words "tyres" and "tires."
-                  They are just variations on the spelling of the same word. In
-                  the UK, "tyre" is the standard version used the most. The
-                  alternative version of "tire" is generally more associated
-                  with American English.
+                  There is no difference between the words &quot;tyres&quot; and
+                  &quot;tires.&quot; They are just variations on the spelling of
+                  the same word. In the UK, &quot;tyre&quot; is the standard
+                  version used the most. The alternative version of
+                  &quot;tire&quot; is generally more associated with American
+                  English.
                 </AccordionContent>
               </AccordionItem>
               <AccordionItem value="item-2">
@@ -236,7 +234,7 @@ const HomePage = () => {
                 <AccordionContent>
                   The type of tyres that you need will depend on the wheel size,
                   your vehicle type, and the driving conditions. Consult your
-                  vehicle’s handbook or a tyre specialist for guidance.
+                  vehicle&apos;s handbook or a tyre specialist for guidance.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
