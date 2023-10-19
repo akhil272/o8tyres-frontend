@@ -90,20 +90,20 @@ const HomePage = () => {
           className="object-cover"
           src="/images/o8tyres-cover-image.jpg"
           alt="home-cover"
-          fill={true}
+          fill
         />
       </div>
       <div className="flex py-8 justify-center">
         <div className="lg:w-3/4  w-full px-8 lg:px-0 md:flex md:space-x-4 space-y-8 md:space-y-0">
           <div className="md:w-1/2 md:space-y-4 space-y-2">
-            <h4 className="text-3xl font-bold">Find Your Tyre</h4>
+            <h4 className="text-3xl font-semibold">Find Your Tyre</h4>
             <div className="space-y-2 md:space-y-4 xl:w-1/2 pb-2">
               <SearchBar
                 data={carModels}
                 placeholder="car model"
                 setSearchTerm={setSearchTerm}
               />
-              <p>Or</p>
+              <p>OR</p>
               <SearchBar
                 data={tyreSizes}
                 placeholder="tyre size"
@@ -111,32 +111,32 @@ const HomePage = () => {
                 setSearchTerm={setSearchTerm}
               />
             </div>
-            <Button onClick={onClickContinue} className="w-full xl:w-1/2">
+            <Button onClick={onClickContinue} className="w-full xl:w-1/2 ">
               Continue
             </Button>
           </div>
           <div className="md:w-1/2">
-            <h4 className="text-3xl font-bold">Talk To Expert</h4>
+            <h4 className="text-3xl font-semibold">Talk To Expert</h4>
             <div className="flex flex-col items-start ">
               <Button
-                className="px-0 text-xl font-medium"
+                className="px-0 mt-2 -mb-2 text-lg font-medium"
                 onClick={onClickCall}
                 variant="link"
               >
                 Call
               </Button>
-              <Button className="px-0 text-xl font-medium" variant="link">
+              <Button className="p-0 -mb-2 text-lg font-medium" variant="link">
                 Assistant
               </Button>
               <Button
-                className="px-0 text-xl font-medium"
+                className="p-0 -mb-2 text-lg font-medium"
                 onClick={onClickWhatsApp}
                 variant="link"
               >
                 WhatsApp Message
               </Button>
               <Button
-                className="px-0 text-xl font-medium"
+                className="p-0 -mb-2 text-lg font-medium"
                 onClick={onClickWhatsApp}
                 variant="link"
               >
@@ -159,7 +159,7 @@ const HomePage = () => {
       <div className="flex justify-center w-full px-8 lg:px-0">
         <div className="xl:w-3/4 flex py-8 flex-col space-y-12">
           <div>
-            <h5 className="text-3xl font-semibold text-center">
+            <h5 className="text-2xl font-semibold text-center">
               How does O8 Tyres Work?
             </h5>
             <div className="flex flex-col space-y-4 justify-start ">
@@ -197,11 +197,11 @@ const HomePage = () => {
             </div>
           </div>
           <div className="w-full">
-            <h5 className="text-3xl font-semibold text-center">Testimonials</h5>
+            <h5 className="text-2xl font-semibold text-center">Testimonials</h5>
             <UserTestimonialCard />
           </div>
           <div>
-            <h5 className="text-3xl font-semibold text-center">
+            <h5 className="text-2xl font-semibold text-center">
               Frequent Asked Questions
             </h5>
             <Accordion className="flex flex-col xl:w-2/5" type="multiple">

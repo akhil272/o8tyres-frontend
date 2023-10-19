@@ -49,10 +49,10 @@ const Navbar = () => {
         <div className="w-full lg:w-auto">
           <div className="flex items-center justify-between">
             <Link href="/">
-              <h1 className="text-2xl lg:text-4xl font-semibold">O8 TYRES</h1>
+              <h1 className="text-3xl lg:text-4xl font-bold ">O8 TYRES</h1>
             </Link>
             <div onClick={() => setOpen(!open)} className="lg:hidden">
-              {open ? <X /> : <Menu />}
+              {open ? <X /> : <Menu className="h-8 w-8" />}
             </div>
           </div>
           <div className=" justify-end ">
