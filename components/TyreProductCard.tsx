@@ -1,9 +1,15 @@
 import Image from "next/image";
 import { Button } from "./ui/button";
 
+import { useRouter } from "next/navigation";
+
 const TyreProductCard = () => {
+  const router = useRouter();
   return (
-    <div className="px-4 py-6 rounded-lg bg-background space-y-2 ">
+    <div
+      onClick={() => router.push("/products/1")}
+      className="px-4 py-6 rounded-lg bg-background space-y-2 "
+    >
       <div className="h-52 w-52 relative">
         <Image
           src="/images/Primacy4ST.webp"
