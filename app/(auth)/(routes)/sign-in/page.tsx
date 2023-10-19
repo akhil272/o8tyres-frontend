@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -24,19 +25,19 @@ const SignInPage = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
-  const onSubmit = (values) => {
-    console.log("submitted", values);
+  const onSubmit = () => {
+    console.log("submitted");
   };
 
   return (
-    <div className="flex flex-col py-10 justify-center h-full">
+    <div className="flex flex-col xl:py-10 py-2 justify-center h-full px-4 md:px-8">
       <h1 className="text-2xl font-bold">Sign In</h1>
       <p>Enter your credentials to access your account</p>
-      <div className="py-20 w-1/2">
+      <div className="xl:py-20 py-4 lg:w-1/2 w-full">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="flex flex-col space-y-6"
+            className="flex flex-col xl:space-y-6"
           >
             <FormField
               control={form.control}
@@ -66,17 +67,22 @@ const SignInPage = () => {
                 </FormItem>
               )}
             />
-            <div className="py-4">
+            <div className="py-4 space-y-2 flex flex-col">
               <Button className="w-full" type="submit">
                 Continue
               </Button>
-              <p className="py-2">Forgot your password?</p>
+              <Link href="/forgot-password">Forgot your password?</Link>
             </div>
           </form>
         </Form>
       </div>
 
-      <p className="text-center w-full">Don&apos;t have an account? Sign Up</p>
+      <p className="text-center w-full">
+        Don&apos;t have an account?
+        <Link className="font-bold" href="/sign-up">
+          Sign Up
+        </Link>
+      </p>
     </div>
   );
 };
