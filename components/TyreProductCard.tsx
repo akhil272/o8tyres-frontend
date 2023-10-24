@@ -13,8 +13,8 @@ const TyreProductCard = () => {
       <div className="h-52 w-52 relative">
         <Image
           src="/images/Primacy4ST.webp"
-          layout="fill"
-          objectFit="cover"
+          fill
+          className="object-fill"
           alt="tyre-image-cover"
         />
       </div>
