@@ -76,7 +76,7 @@ const Navbar = () => {
             </Link>
           ))}
           {user ? (
-            <div className="flex items-center space-x-4 ">
+            <div className="flex items-center ">
               {user.username}
               <AccountDropDownMenu />
             </div>
