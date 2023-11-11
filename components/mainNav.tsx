@@ -6,21 +6,25 @@ import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { Button } from "./ui/button";
+import { useAppSelector } from "@/redux/hooks";
 
 export function MainNav({
   className,
   ...props
 }: React.HTMLAttributes<HTMLElement>) {
+  const user = useAppSelector((state) => state.auth.user);
+
   const router = useRouter();
   const handleSignInBtnClick = () => {
     router.push("/sign-in");
   };
   const pathname = usePathname();
   const params = useParams();
+
   const routes = [
     {
       href: `/`,
-      label: "Home",
+      label: "Home ",
       active: pathname === `/`,
     },
     {
@@ -53,7 +57,10 @@ export function MainNav({
           {route.label}
         </Link>
       ))}
-      <Button className="font-medium text-xl">Sign In</Button>
+
+      <Button className="font-medium text-xl">
+        {user ? user.username : "Sign In"}
+      </Button>
       <Button
         onClick={handleSignInBtnClick}
         className="bg-white font-medium text-xl text-primary  hover:bg-slate-200"

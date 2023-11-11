@@ -3,6 +3,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import Footer from "@/components/Footer";
+import { Providers } from "@/redux/provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -19,9 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={nunito.className}>
-        <Navbar />
-        {children}
-        <Footer />
+        <Providers>
+          <Navbar />
+          {children}
+          <Footer />
+        </Providers>
+        <Toaster />
       </body>
     </html>
   );

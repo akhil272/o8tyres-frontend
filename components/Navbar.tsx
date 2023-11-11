@@ -4,13 +4,16 @@ import React, { useState } from "react";
 import { redirect, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 
-import { Menu, ShoppingCart, X } from "lucide-react";
+import { ChevronDown, Menu, ShoppingCart, X } from "lucide-react";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import MobileNav from "./mobileNav";
+import { useAppSelector } from "@/redux/hooks";
+import { AccountDropDownMenu } from "./AccountDropDownMenu";
 
 const Navbar = () => {
+  const user = useAppSelector((state) => state.auth.user);
   const router = useRouter();
   const pathname = usePathname();
   const params = useParams();
@@ -43,6 +46,7 @@ const Navbar = () => {
       active: pathname === `/contact`,
     },
   ];
+  console.log(user, "user");
   return (
     <nav className="w-full bg-primary text-primary-foreground md:py-4 py-2 xl:px-16 md:px-8 px-4">
       <div className="flex md:flex-row flex-col justify-between ">
@@ -71,16 +75,24 @@ const Navbar = () => {
               {route.label}
             </Link>
           ))}
-          <div className="flex space-x-4 items-center ">
-            <div onClick={() => router.push("/sign-in")}>Sign In</div>
-            <Button
-              onClick={() => router.push("/sign-up")}
-              variant="secondary"
-              className="text-xl"
-            >
-              Sign Up
-            </Button>
-          </div>
+          {user ? (
+            <div className="flex items-center space-x-4 ">
+              {user.username}
+              <AccountDropDownMenu />
+            </div>
+          ) : (
+            <div className="flex space-x-4 items-center ">
+              <div onClick={() => router.push("/sign-in")}>Sign In</div>
+              <Button
+                onClick={() => router.push("/sign-up")}
+                variant="secondary"
+                className="text-xl"
+              >
+                Sign Up
+              </Button>
+            </div>
+          )}
+
           <div onClick={() => router.push("/my-cart")}>
             <ShoppingCart className="h-10 w-10" />
           </div>

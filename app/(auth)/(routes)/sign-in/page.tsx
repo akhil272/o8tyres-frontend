@@ -15,18 +15,72 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { useSignInMutation } from "@/redux/services/authApi";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
+import { getTimeBasedGreeting } from "@/lib/utils";
+import { ErrorResponse } from "@/redux/types";
+
+const passwordSchema = z
+  .string()
+  .refine(
+    (password) =>
+      password.length >= 8 &&
+      /[a-z]/.test(password) &&
+      /[A-Z]/.test(password) &&
+      /[0-9]/.test(password) &&
+      /\W|_/.test(password),
+    {
+      message:
+        "Password must be at least 8 characters long and include a mix of uppercase and lowercase letters, numbers, and special characters",
+    }
+  );
 
 const formSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(4).max(16),
+  password: passwordSchema,
 });
 
 const SignInPage = () => {
+  const [signIn, { isLoading }] = useSignInMutation();
+  const router = useRouter();
+  const { toast } = useToast();
+  const greeting = getTimeBasedGreeting();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
-  const onSubmit = () => {
-    console.log("submitted");
+  const onSubmit = async (data: { email: string; password: string }) => {
+    try {
+      const response = await signIn(data).unwrap();
+      if (response.success) {
+        toast({
+          duration: 3000,
+          title: `${greeting}, ${response.data.user.username}`,
+          description: "Good to see you back",
+        });
+        router.push("/");
+      }
+    } catch (error: unknown) {
+      if (typeof error === "object" && error !== null) {
+        const err = error as ErrorResponse;
+        if (err.data && err.data.message) {
+          toast({
+            variant: "destructive",
+            duration: 5000,
+            title: `${
+              err.status === 401 || err.status === 400
+                ? "Invalid Credentials"
+                : "Server error"
+            }`,
+            description: err.data.message,
+          });
+        }
+      }
+    }
   };
 
   return (
@@ -46,7 +100,11 @@ const SignInPage = () => {
                 <FormItem>
                   <FormLabel className="font-medium text-lg">Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter registered email" {...field} />
+                    <Input
+                      type="email"
+                      placeholder="Enter registered email"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -61,7 +119,12 @@ const SignInPage = () => {
                     Password
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter registered password" {...field} />
+                    <Input
+                      type="password"
+                      autoComplete="current-password"
+                      placeholder="Enter registered password"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -69,7 +132,7 @@ const SignInPage = () => {
             />
             <div className="py-4 space-y-2 flex flex-col">
               <Button className="w-full" type="submit">
-                Continue
+                {isLoading ? "Processing" : "Continue"}
               </Button>
               <Link href="/forgot-password">Forgot your password?</Link>
             </div>
