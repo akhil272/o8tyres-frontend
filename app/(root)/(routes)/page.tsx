@@ -12,67 +12,16 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import UserTestimonialCard from "@/components/UserTestimonialCard";
-
-const tyreSizes = [
-  { label: "195/80 R15 89 V", value: "195/80 R15 89 V" },
-  { label: "205/75 R16 91 H", value: "205/75 R16 91 H" },
-  { label: "215/70 R17 93 W", value: "215/70 R17 93 W" },
-  { label: "225/65 R18 95 Y", value: "225/65 R18 95 Y" },
-  { label: "235/60 R19 97 Z", value: "235/60 R19 97 Z" },
-  { label: "245/55 R20 99 A", value: "245/55 R20 99 A" },
-  { label: "255/50 R21 101 B", value: "255/50 R21 101 B" },
-  { label: "265/45 R22 103 C", value: "265/45 R22 103 C" },
-  { label: "275/40 R23 105 D", value: "275/40 R23 105 D" },
-  { label: "285/35 R24 107 E", value: "285/35 R24 107 E" },
-];
-
-const carModels = [
-  { label: "Tata Sumo", value: "Tata Sumo" },
-  { label: "Chevrolet Tavera", value: "Chevrolet Tavera" },
-  {
-    label: "Honda Amaze 2013",
-    value: "Honda Amaze",
-  },
-  {
-    label: "Honda City 1996",
-    value: "Honda City",
-  },
-  {
-    label: "Honda City Hybrid eHEV 2020",
-    value: "Honda City Hybrid eHEV",
-  },
-  {
-    label: "Honda Elevate 2023",
-    value: "Honda Elevate",
-  },
-  {
-    label: "Honda WR-V 2017",
-    value: "Honda WR-V",
-  },
-  {
-    label: "Honda Civic 1972",
-    value: "Honda Civic",
-  },
-  {
-    label: "Honda CR-V 1995",
-    value: "Honda CR-V",
-  },
-  {
-    label: "Honda Accord Hybrid 1976",
-    value: "Honda Accord Hybrid",
-  },
-  { label: "Toyota Innova", value: "Toyota Innova" },
-  { label: "Maruti Gypsy king", value: "Maruti Gypsy king" },
-  { label: "Toyota Corolla", value: "Toyota Corolla" },
-  { label: "Skoda", value: "Skoda" },
-  {
-    label: "Mahindra Bolero PikUp ExtraLong",
-    value: "Mahindra Bolero PikUp ExtraLong",
-  },
-];
+import {
+  useFindTyreSizesQuery,
+  useFindVehicleModelsQuery,
+} from "@/redux/services/productApi";
 
 const HomePage = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const { data, isLoading, error } = useFindVehicleModelsQuery(null);
+  const { data: tyreSizesData, isLoading: tyreSizeIsLoading } =
+    useFindTyreSizesQuery(null);
   const router = useRouter();
   const onClickContinue = () => {
     router.push(`/products/search?query=${searchTerm}`);
@@ -83,6 +32,8 @@ const HomePage = () => {
   const onClickWhatsApp = () => {
     window.open("https://wa.me/+919745222566", "_blank");
   };
+  if (isLoading || tyreSizeIsLoading) return <div>Loading...</div>;
+
   return (
     <div>
       <div className="lg:h-[640px] h-[320px] w-full relative">
@@ -98,18 +49,27 @@ const HomePage = () => {
           <div className="md:w-1/2 md:space-y-4 space-y-2">
             <h4 className="text-3xl font-semibold">Find Your Tyre</h4>
             <div className="space-y-2 md:space-y-4 xl:w-1/2 pb-2">
-              <SearchBar
-                data={carModels}
-                placeholder="car model"
-                setSearchTerm={setSearchTerm}
-              />
+              {data && !isLoading && (
+                <SearchBar
+                  data={data.data?.map((v) => ({
+                    label: v.model,
+                    value: v.id,
+                  }))}
+                  placeholder="car model"
+                  setSearchTerm={setSearchTerm}
+                />
+              )}
               <p>OR</p>
-              <SearchBar
-                data={tyreSizes}
-                placeholder="tyre size"
-                enableContactOffline={true}
-                setSearchTerm={setSearchTerm}
-              />
+              {tyreSizesData && !tyreSizeIsLoading && (
+                <SearchBar
+                  data={tyreSizesData.data?.map((v) => ({
+                    label: v.size,
+                    value: v.id,
+                  }))}
+                  placeholder="tyre size"
+                  setSearchTerm={setSearchTerm}
+                />
+              )}
             </div>
             <Button onClick={onClickContinue} className="w-full xl:w-1/2 ">
               Continue

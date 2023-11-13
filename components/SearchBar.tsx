@@ -8,7 +8,7 @@ import { Button } from "./ui/button";
 interface SearchBarProps {
   data: {
     label: string;
-    value: string;
+    value: number;
   }[];
   placeholder: string;
   enableContactOffline?: boolean;

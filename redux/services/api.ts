@@ -69,7 +69,7 @@ const customFetchBaseQuery: BaseQueryFn<
 // Create API
 export const api = createApi({
   reducerPath: "api",
-  tagTypes: ["Auth"],
+  tagTypes: ["Auth", "Products"],
   refetchOnFocus: true,
   baseQuery: customFetchBaseQuery,
   endpoints: () => ({}),
