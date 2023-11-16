@@ -3,6 +3,11 @@ export type ApiResponse<T> = {
   status?: number;
   message?: string;
   data: T;
+  meta?: {
+    total: number;
+    page: number;
+    lastPage: number;
+  };
 };
 
 export type ErrorResponse = {
