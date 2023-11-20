@@ -39,6 +39,12 @@ export const productApi = apiWithTags.injectEndpoints({
         };
       },
     }),
+    findTyreProductById: builder.query<
+      ApiResponse<TyreProduct>,
+      { productId: number }
+    >({
+      query: ({ productId }) => `/tyre-products/${productId}`,
+    }),
   }),
 });
 
@@ -46,4 +52,5 @@ export const {
   useFindVehicleModelsQuery,
   useFindTyreSizesQuery,
   useFindTyreProductsQuery,
+  useFindTyreProductByIdQuery,
 } = productApi;

@@ -10,12 +10,12 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useDispatch } from "react-redux";
 import { signOutUser } from "@/redux/features/authSlice";
 import { persistor } from "@/redux/store";
+import { useAppDispatch } from "@/redux/hooks";
 
 export function AccountDropDownMenu() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const handleSignOut = () => {
     dispatch(signOutUser());
     persistor.purge();

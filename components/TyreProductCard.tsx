@@ -3,9 +3,9 @@ import { Button } from "./ui/button";
 
 import { useRouter } from "next/navigation";
 import { TyreProduct } from "@/redux/types";
-import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/features/cartSlice";
 import { useState } from "react";
+import { useAppDispatch } from "@/redux/hooks";
 
 interface TyreProductProps {
   tyreProduct: TyreProduct;
@@ -13,14 +13,17 @@ interface TyreProductProps {
 
 const TyreProductCard = ({ tyreProduct }: TyreProductProps) => {
   const router = useRouter();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [quantity, setQuantity] = useState<number>(4);
   const onClickAddToCart = (tyreProduct: TyreProduct, quantity: number) => {
     dispatch(addToCart({ ...tyreProduct, cartQuantity: quantity }));
   };
+  const onClickProductDetail = () => {
+    router.push(`/products/${tyreProduct.id}`);
+  };
   return (
     <div className="px-4 py-6 rounded-lg bg-background space-y-2 ">
-      <div onClick={() => router.push("/products/1")}>
+      <div onClick={onClickProductDetail}>
         <div className="h-52 w-52 relative">
           <Image
             src="/images/Primacy4ST.webp"
@@ -53,6 +56,8 @@ const TyreProductCard = ({ tyreProduct }: TyreProductProps) => {
         <input
           onChange={(e) => setQuantity(Number(e.target.value))}
           defaultValue={4}
+          min={1}
+          max={30}
           type="number"
           className="p-2 w-1/5 bg-zinc-100 rounded-md text-center"
         />

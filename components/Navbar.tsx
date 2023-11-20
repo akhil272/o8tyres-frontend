@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
 
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 
-import { ChevronDown, Menu, ShoppingCart, X } from "lucide-react";
+import { Menu, ShoppingCart, X } from "lucide-react";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -16,14 +16,9 @@ const Navbar = () => {
   const user = useAppSelector((state) => state.auth.user);
   const router = useRouter();
   const pathname = usePathname();
-  const params = useParams();
   const [open, setOpen] = useState(false);
-  const handleSignInBtnClick = () => {
-    router.push("/sign-in");
-  };
-  const handleLogoClick = () => {
-    router.push("/");
-  };
+  const cart = useAppSelector((state) => state.cart.cart);
+
   const routes = [
     {
       href: `/`,
@@ -93,8 +88,18 @@ const Navbar = () => {
             </div>
           )}
 
-          <div onClick={() => router.push("/my-cart")}>
+          <div
+            className="flex relative"
+            onClick={() => router.push("/my-cart")}
+          >
             <ShoppingCart className="h-10 w-10" />
+            {cart.length > 0 && (
+              <div className="rounded-full right-0 absolute bg-white w-6 h-6 text-primary">
+                <div className="item-center justify-center p-1 flex text-xs">
+                  {cart.length}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
