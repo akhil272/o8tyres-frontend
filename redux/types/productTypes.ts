@@ -13,6 +13,7 @@ export type TyreProduct = {
   createdAt: Date;
   updatedAt: Date;
   deletedAt: Date | null;
+  description: string;
   subCategory: {
     id: number;
     name: string;
@@ -39,6 +40,17 @@ export type TyreProduct = {
         vehicleType: string;
       }
     ];
+  };
+  tyreSpecification: {
+    width: number;
+    profile: number;
+    rimSize: number;
+    loadIndex: number;
+    speedRating: string;
+    weight: number;
+    maxLoad: number;
+    constructionType: string;
+    tubeless: true;
   };
 };
 

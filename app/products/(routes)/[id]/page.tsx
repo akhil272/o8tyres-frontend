@@ -33,7 +33,6 @@ const ProductPage = () => {
   };
   if (isLoading) return <div>Loading....</div>;
   const tyreProductDetail = data?.data;
-
   return (
     <div className="w-full">
       <div className="flex justify-between">
@@ -56,7 +55,7 @@ const ProductPage = () => {
               />
             </div>
             <div className="w-full pt-4 xl:pt-0">
-              <h1>Michelin</h1>
+              <h1>{tyreProductDetail.pattern.brand.name}</h1>
               <h2 className="font-semibold">
                 {tyreProductDetail?.pattern.name}
               </h2>
@@ -67,16 +66,7 @@ const ProductPage = () => {
                 <UserRating rating={4} />
                 <span>4/5 (120 reviews)</span>
               </div>
-              <p className="py-2">
-                Introducing the Michelin Primacy 4 the tyre that will give you
-                outstanding braking performance from the very first to the very
-                last mile. No need to compromise on longevity as Primacy 4 will
-                last 11,000 miles longer than its competitors, with an
-                innovative new treadwear feature that will let you know when
-                your tyres need changing. Crafted from the latest generation
-                high performance rubber compound, the optimised sculpture and
-                safety orientated design boosts performance.
-              </p>
+              <p className="py-2">{tyreProductDetail.description}</p>
             </div>
           </div>
           <div className="w-full bg-secondary flex flex-col md:flex-row p-4 gap-4 rounded-md">
@@ -110,15 +100,18 @@ const ProductPage = () => {
           </div>
           <div className="py-4 ">
             <h4 className="font-semibold py-2">Specifications</h4>
-            <div className=" md:gap-x-4 md:flex-row flex-col  gap-y-4 flex ">
-              <TyreSpecificationCard />
-              <TyreSpecificationCard />
+            <div>
+              <TyreSpecificationCard
+                specification={tyreProductDetail.tyreSpecification}
+              />
             </div>
           </div>
           <div className="py-4 ">
             <h4 className="font-semibold py-2">Vehicle Compatibility</h4>
             <div className=" md:gap-x-4 md:flex-row flex-col  gap-y-4 flex ">
-              <VehicleCompatibilityCard />
+              <VehicleCompatibilityCard
+                vehicleModels={tyreProductDetail.tyreSize.vehicleModels}
+              />
             </div>
           </div>
           <div className="py-4 ">
