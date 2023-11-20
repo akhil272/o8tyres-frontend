@@ -12,7 +12,7 @@ interface SearchBarProps {
   }[];
   placeholder: string;
   enableContactOffline?: boolean;
-  setSearchTerm: (searchTerm: string) => void;
+  setSearchTerm: (searchTerm: { label: string; value: number }) => void;
 }
 
 export function SearchBar({
@@ -32,9 +32,9 @@ export function SearchBar({
     setShowButtons(!termExists);
   };
 
-  const onSearch = (searchTerm: string) => {
-    setUserQuery(searchTerm);
-    setSearchTerm(searchTerm);
+  const onSearch = (selectedItem: { label: string; value: number }) => {
+    setUserQuery(selectedItem.label);
+    setSearchTerm(selectedItem);
   };
 
   const handleWhatsAppClick = () => {
@@ -86,7 +86,7 @@ export function SearchBar({
           .map((item) => (
             <div
               className="py-2 px-2 bg-secondary hover:bg-white"
-              onClick={() => onSearch(item.label)}
+              onClick={() => onSearch(item)}
               key={item.value}
             >
               {item.label}

@@ -7,3 +7,41 @@ export type TyreSize = {
   id: number;
   size: string;
 };
+
+export type TyreProduct = {
+  id: number;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: Date | null;
+  subCategory: {
+    id: number;
+    name: string;
+    category: {
+      id: number;
+      name: string;
+    };
+  };
+  pattern: {
+    id: number;
+    name: string;
+    brand: {
+      id: number;
+      name: string;
+    };
+  };
+  tyreSize: {
+    id: number;
+    size: string;
+    vehicleModels: [
+      {
+        id: number;
+        model: string;
+        vehicleType: string;
+      }
+    ];
+  };
+};
+
+export type TyreProductApiResponse = {
+  tyreProducts: TyreProduct[];
+};

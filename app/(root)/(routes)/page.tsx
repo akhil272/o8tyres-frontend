@@ -18,13 +18,23 @@ import {
 } from "@/redux/services/productApi";
 
 const HomePage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState({
+    label: "",
+    value: 0,
+  });
+  const [activeSearchBar, setActiveSearchBar] = useState<
+    "vehicleModel" | "tyreSize" | null
+  >(null);
   const { data, isLoading, error } = useFindVehicleModelsQuery(null);
   const { data: tyreSizesData, isLoading: tyreSizeIsLoading } =
     useFindTyreSizesQuery(null);
   const router = useRouter();
   const onClickContinue = () => {
-    router.push(`/products/search?query=${searchTerm}`);
+    if (activeSearchBar === "vehicleModel") {
+      router.push(`/products/search?vehicleModelId=${searchTerm?.value}`);
+    } else if (activeSearchBar === "tyreSize") {
+      router.push(`/products/search?tyreSizeId=${searchTerm?.value}`);
+    }
   };
   const onClickCall = () => {
     window.location.href = "tel:+919745222566";
@@ -56,7 +66,10 @@ const HomePage = () => {
                     value: v.id,
                   }))}
                   placeholder="car model"
-                  setSearchTerm={setSearchTerm}
+                  setSearchTerm={(term) => {
+                    setSearchTerm(term);
+                    setActiveSearchBar("vehicleModel");
+                  }}
                 />
               )}
               <p>OR</p>
@@ -67,7 +80,10 @@ const HomePage = () => {
                     value: v.id,
                   }))}
                   placeholder="tyre size"
-                  setSearchTerm={setSearchTerm}
+                  setSearchTerm={(term) => {
+                    setSearchTerm(term);
+                    setActiveSearchBar("tyreSize");
+                  }}
                 />
               )}
             </div>
