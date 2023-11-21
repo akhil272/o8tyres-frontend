@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { z } from "zod";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -20,3 +21,18 @@ export function getTimeBasedGreeting() {
 
   return greeting;
 }
+
+export const passwordSchema = z
+  .string()
+  .refine(
+    (password) =>
+      password.length >= 8 &&
+      /[a-z]/.test(password) &&
+      /[A-Z]/.test(password) &&
+      /[0-9]/.test(password) &&
+      /\W|_/.test(password),
+    {
+      message:
+        "Password must be at least 8 characters long and include a mix of uppercase and lowercase letters, numbers, and special characters",
+    }
+  );

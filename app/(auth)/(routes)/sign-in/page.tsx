@@ -18,23 +18,8 @@ import Link from "next/link";
 import { useSignInMutation } from "@/redux/services/authApi";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
-import { getTimeBasedGreeting } from "@/lib/utils";
+import { getTimeBasedGreeting, passwordSchema } from "@/lib/utils";
 import { ErrorResponse } from "@/redux/types";
-
-const passwordSchema = z
-  .string()
-  .refine(
-    (password) =>
-      password.length >= 8 &&
-      /[a-z]/.test(password) &&
-      /[A-Z]/.test(password) &&
-      /[0-9]/.test(password) &&
-      /\W|_/.test(password),
-    {
-      message:
-        "Password must be at least 8 characters long and include a mix of uppercase and lowercase letters, numbers, and special characters",
-    }
-  );
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -102,7 +87,7 @@ const SignInPage = () => {
                   <FormControl>
                     <Input
                       type="email"
-                      placeholder="Enter registered email"
+                      placeholder="Enter your registered email"
                       {...field}
                     />
                   </FormControl>
@@ -122,7 +107,7 @@ const SignInPage = () => {
                     <Input
                       type="password"
                       autoComplete="current-password"
-                      placeholder="Enter registered password"
+                      placeholder="Enter your password"
                       {...field}
                     />
                   </FormControl>
