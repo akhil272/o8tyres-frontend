@@ -46,12 +46,12 @@ const Navbar = () => {
         <div className="w-full lg:w-auto">
           <div className="flex items-center justify-between">
             <Link href="/">
-              <h1 className="text-3xl lg:text-4xl font-bold ">O8 TYRES</h1>
+              <h1 className="text-2xl lg:text-4xl font-bold ">O8 TYRES</h1>
             </Link>
             <MenuItemSheet routes={routes} />
           </div>
         </div>
-        <div className="hidden lg:flex space-x-20 items-center text-xl font-medium">
+        <div className="hidden lg:flex xl:space-x-20 md:space-x-10 items-center text-xl font-medium">
           {routes.map((route) => (
             <Link
               href={route.href}
