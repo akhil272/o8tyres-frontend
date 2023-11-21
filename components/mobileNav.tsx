@@ -1,48 +1,64 @@
+import { useAppSelector } from "@/redux/hooks";
 import Link from "next/link";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
-const routes = [
+interface MobileNavProps {
+  routes: { href: string; label: string; active?: boolean }[];
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+const authRoutes = [
   {
-    href: `/`,
-    label: "Home",
+    href: `/sign-in`,
+    label: "Sign In",
   },
   {
-    href: `/offers`,
-    label: "Offers",
+    href: `/sign-up`,
+    label: "Sign Up",
   },
+];
+const cartRoutes = [
   {
-    href: `/about`,
-    label: "About",
-  },
-  {
-    href: `/contact`,
-    label: "Contact",
+    href: `/my-cart`,
+    label: "My Cart",
   },
 ];
 
-const MobileNav = ({ open, setOpen }: any) => {
+const MobileNav = ({ routes, open, setOpen }: MobileNavProps) => {
+  const user = useAppSelector((state) => state.auth.user);
+  let mobileRoutes = [];
+  if (user) {
+    mobileRoutes = [...routes, ...cartRoutes];
+  } else {
+    mobileRoutes = [...routes, ...authRoutes, ...cartRoutes];
+  }
   return (
     <div className="text-xl font-medium" onClick={() => setOpen(!open)}>
       <div className="flex flex-col space-y-4 px-2">
         <ul className="flex items-end flex-col w-full  space-y-4 ">
-          <div className="w-full flex justify-end  items-end border-b-2">
-            <h4 className="py-2">
-              Hello, <b>Anand</b>
-            </h4>
-          </div>
-          {routes?.map((route) => (
+          {user && (
+            <div className="w-full flex justify-end  items-end border-b-2">
+              <h4 className="py-2">
+                Hello, <b>{user.username}</b>
+              </h4>
+            </div>
+          )}
+          {mobileRoutes?.map((route) => (
             <Link href={route.href} key={route.href}>
               {route.label}
             </Link>
           ))}
         </ul>
-        <div className="w-full flex flex-col space-y-4 justify-end items-end border-t-2 py-4">
-          <div>Your Account</div>
-          <div>Your Orders</div>
+        {user && (
           <div className="w-full flex flex-col space-y-4 justify-end items-end border-t-2 py-4">
-            <div>Sign Out</div>
+            <div>Your Account</div>
+            <div>Your Orders</div>
+            <div className="w-full flex flex-col space-y-4 justify-end items-end border-t-2 py-4">
+              <div>Sign Out</div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

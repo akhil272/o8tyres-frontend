@@ -55,7 +55,9 @@ const Navbar = () => {
             </div>
           </div>
           <div className=" justify-end ">
-            {open && <MobileNav route={routes} open={open} setOpen={setOpen} />}
+            {open && (
+              <MobileNav routes={routes} open={open} setOpen={setOpen} />
+            )}
           </div>
         </div>
         <div className="hidden lg:flex space-x-20 items-center text-xl font-medium">

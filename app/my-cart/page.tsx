@@ -1,4 +1,5 @@
 "use client";
+import CartLineItem from "@/components/CartLineItem";
 import { Button } from "@/components/ui/button";
 import {
   TableCaption,
@@ -29,7 +30,7 @@ interface SmallTyreProductCardProps {
 
 const SmallTyreProductCard = ({ tyreProduct }: SmallTyreProductCardProps) => {
   return (
-    <div className="p-4 bg-white rounded-lg flex space-x-4">
+    <div className="p-4 bg-white rounded-lg flex  space-x-4">
       <div className="h-32 w-32 relative">
         <Image
           src="/images/Primacy4ST.webp"
@@ -65,70 +66,86 @@ const MyCart = () => {
     dispatch(removeItem(id));
   };
   return (
-    <div className="flex justify-center xl:py-10 bg-secondary h-full">
-      <div className="flex ">
-        <div className="flex flex-col">
+    <div className="flex w-full justify-center md:py-10 py-4 px-4 bg-secondary h-full">
+      <div className="xl:w-1/2 w-full">
+        <div>
           <h1 className="font-bold text-3xl ">My Cart</h1>
           {cartItem.length > 0 ? (
-            <>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="px-0  text-lg">
-                      Product Details
-                    </TableHead>
-                    <TableHead className="text-medium text-lg">
-                      Quantity
-                    </TableHead>
-                    <TableHead className="text-medium text-lg">Cost</TableHead>
-                    <TableHead className="text-medium text-lg">
-                      Discount
-                    </TableHead>
-                    <TableHead className="text-right text-lg">Total</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {cartItem.map((tyreProduct) => (
-                    <TableRow
-                      key={tyreProduct.id}
-                      className="bg-white hover:bg-white"
-                    >
-                      <TableCell className="font-medium">
-                        <SmallTyreProductCard tyreProduct={tyreProduct} />
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center justify-center space-x-2">
-                          <Minus
-                            onClick={() => onClickMinus(tyreProduct.id)}
-                            size={16}
-                          />
-                          <label className="bg-secondary px-4 rounded-lg py-1 text-xl font-medium">
-                            {tyreProduct.cartQuantity}
-                          </label>
-                          <Plus
-                            onClick={() => onClickPlus(tyreProduct.id)}
-                            size={16}
-                          />
-                        </div>
-                      </TableCell>
-                      <TableCell>Rs 15,0000</TableCell>
-                      <TableCell>Rs 2000</TableCell>
-                      <TableCell className="text-right h-full ">
-                        <div className=" flex relative flex-col justify-between items-center h-full">
-                          <label>Rs 14000</label>
-                          <Button
-                            onClick={() => onClickDeleteProduct(tyreProduct.id)}
-                            className="absolute top-10"
-                            variant={"secondary"}
-                          >
-                            Delete
-                          </Button>
-                        </div>
-                      </TableCell>
+            <div>
+              <div className="hidden md:flex">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="px-0 text-lg">
+                        Product Details
+                      </TableHead>
+                      <TableHead className="text-medium text-lg">
+                        Quantity
+                      </TableHead>
+                      <TableHead className="text-medium text-lg">
+                        Cost
+                      </TableHead>
+                      <TableHead className="text-medium text-lg">
+                        Discount
+                      </TableHead>
+                      <TableHead className="text-right text-lg">
+                        Total
+                      </TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {cartItem.map((tyreProduct) => (
+                      <TableRow
+                        key={tyreProduct.id}
+                        className="bg-white hover:bg-white"
+                      >
+                        <TableCell className="font-medium">
+                          <SmallTyreProductCard tyreProduct={tyreProduct} />
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center justify-center space-x-2">
+                            <Minus
+                              onClick={() => onClickMinus(tyreProduct.id)}
+                              size={16}
+                            />
+                            <label className="bg-secondary px-4 rounded-lg py-1 text-xl font-medium">
+                              {tyreProduct.cartQuantity}
+                            </label>
+                            <Plus
+                              onClick={() => onClickPlus(tyreProduct.id)}
+                              size={16}
+                            />
+                          </div>
+                        </TableCell>
+                        <TableCell>15,0000</TableCell>
+                        <TableCell>2000</TableCell>
+                        <TableCell className="text-right h-full ">
+                          <div className=" flex relative flex-col justify-between items-center h-full">
+                            <label>Rs 14000</label>
+                            <Button
+                              onClick={() =>
+                                onClickDeleteProduct(tyreProduct.id)
+                              }
+                              className="absolute top-10"
+                              variant={"secondary"}
+                            >
+                              Delete
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+              <div className="md:hidden">
+                {cartItem.map((tyreProduct) => (
+                  <CartLineItem
+                    key={tyreProduct.id}
+                    tyreProduct={tyreProduct}
+                  />
+                ))}
+              </div>
               <div className="w-full border-t-2 py-4 flex flex-col items-end">
                 <div className="flex gap-4">
                   <label>SubTotal</label>
@@ -149,18 +166,21 @@ const MyCart = () => {
                   <label className="font-black text-red-600">Rs 40,000</label>
                 </div>
               </div>
-              <div className="w-full flex items-center">
-                <div className="w-2/3">
+              <div className="w-full flex md:flex-row flex-col items-center">
+                <div className="md:w-2/3 md:order-1 text-sm md:text-base my-4 order-2">
                   Get Date Of Manufacture of tyres in the cart?{" "}
                   <Link className="underline font-bold" href={"/"}>
                     Click Here
                   </Link>
                 </div>
-                <Button size={"lg"} className="w-1/3 text-lg">
+                <Button
+                  size={"lg"}
+                  className="md:w-1/3  w-full text-lg md:order-2 order-1"
+                >
                   Proceed To Checkout
                 </Button>
               </div>
-            </>
+            </div>
           ) : (
             "No items"
           )}
