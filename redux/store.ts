@@ -8,6 +8,7 @@ import { authApi } from "./services/authApi";
 import { cartReducer } from "./features/cartSlice";
 import { productApi } from "./services/productApi";
 import { api } from "./services/api";
+import { userApi } from "./services/userApi";
 
 const authPersistConfig = {
   key: "auth",
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
   [authApi.reducerPath]: authApi.reducer,
   [productApi.reducerPath]: productApi.reducer,
+  [userApi.reducerPath]: userApi.reducer,
   cart: persistReducer(cartPersistConfig, cartReducer),
 });
 
@@ -31,7 +33,12 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: { ignoredActions: [PERSIST, "persist/PURGE"] },
-    }).concat([api.middleware, authApi.middleware, productApi.middleware]),
+    }).concat([
+      api.middleware,
+      authApi.middleware,
+      productApi.middleware,
+      userApi.middleware,
+    ]),
 });
 
 export const persistor = persistStore(store);

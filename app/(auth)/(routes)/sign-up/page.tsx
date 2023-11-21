@@ -1,13 +1,21 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 import Link from "next/link";
-import SignUpFormUser from "@/components/form/SignUpFormUser";
+import SignUpFormCustomer from "@/components/form/SignUpFormCustomer";
+import SignUpFormBusiness from "@/components/form/SignUpFormBusiness";
 
 const SignUpPage = () => {
+  const [userTypeCustomer, setUserTypeCustomer] = useState<boolean>(true);
   return (
-    <div>
+    <div className="overflow-auto">
+      <div
+        onClick={() => setUserTypeCustomer(!userTypeCustomer)}
+        className="flex justify-end"
+      >
+        Sign Up as {userTypeCustomer ? "business entity" : "customer"}
+      </div>
       <h1 className="text-2xl font-bold">Sign Up</h1>
       <p>
         Have an account?{" "}
@@ -15,8 +23,8 @@ const SignUpPage = () => {
           Sign In
         </Link>
       </p>
-      <div className="py-4 w-full">
-        <SignUpFormUser />
+      <div className="py-4 w-full ">
+        {userTypeCustomer ? <SignUpFormCustomer /> : <SignUpFormBusiness />}
       </div>
     </div>
   );

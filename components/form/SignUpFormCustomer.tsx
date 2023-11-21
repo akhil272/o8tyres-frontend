@@ -22,6 +22,11 @@ import {
   CommandItem,
 } from "../ui/command";
 import { cn, passwordSchema } from "@/lib/utils";
+import { useSignUpCustomerMutation } from "@/redux/services/authApi";
+import { useToast } from "../ui/use-toast";
+import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/redux/hooks";
+import { useFindPinCodesQuery } from "@/redux/services/userApi";
 interface PersonalData {
   phoneNumber: string;
   firstName: string;
@@ -62,17 +67,22 @@ const addressFormSchema = z.object({
     code: z.number(),
   }),
 });
-const pinCodes = [
-  { id: 1, code: 490202 },
-  { id: 2, code: 490203 },
-  { id: 3, code: 682021 },
-];
-const SignUpFormUser = () => {
+
+const SignUpFormCustomer = () => {
   const [page, setPage] = useState<number>(1);
   const [showPinCodeList, setShowPinCodeList] = useState(false);
-  const [personalData, setPersonalData] = useState<PersonalData | undefined>(
-    undefined
-  );
+  const [personalData, setPersonalData] = useState<PersonalData>({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    email: "",
+    password: "",
+  });
+  const cart = useAppSelector((state) => state.cart.cart);
+  const [signUpCustomer, { isLoading }] = useSignUpCustomerMutation();
+  const { data: pinCodesData } = useFindPinCodesQuery(null);
+  const { toast } = useToast();
+  const router = useRouter();
   const form = useForm<z.infer<typeof validationSchema>>({
     resolver: zodResolver(validationSchema),
   });
@@ -84,9 +94,37 @@ const SignUpFormUser = () => {
     setPersonalData(data);
     setPage(2);
   };
-  const onFinalSubmit = (data: AddressData) => {
-    const signUpData = { ...personalData, ...data };
+  const onFinalSubmit = async (data: AddressData) => {
+    const {
+      pinCode: { id: pinCode },
+      addressLine01,
+      addressLine02,
+    } = data;
+
+    try {
+      const response = await signUpCustomer({
+        ...personalData,
+        addressLine01,
+        addressLine02,
+        pinCode,
+      }).unwrap();
+      if (response.success) {
+        toast({
+          title: "Account created successfully.",
+          duration: 3000,
+        });
+        if (cart.length > 0) {
+          router.push("/checkout");
+        } else router.push("/");
+      }
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Failed to create account.",
+      });
+    }
   };
+
   return (
     <>
       <div className="flex flex-col items-center pb-6">
@@ -274,12 +312,13 @@ const SignUpFormUser = () => {
                         <FormControl>
                           <div className="relative w-full">
                             <Button
+                              type="button"
                               className="xl:w-full w-1/2  flex justify-between"
                               variant="outline"
                               role="combobox"
                             >
                               {field.value
-                                ? pinCodes.find(
+                                ? pinCodesData?.data.find(
                                     (pinCode) => pinCode.id === field.value.id
                                   )?.code
                                 : "Pin Code"}
@@ -296,7 +335,7 @@ const SignUpFormUser = () => {
                             Not available for shipping.
                           </CommandEmpty>
                           <CommandGroup>
-                            {pinCodes.map((pinCode) => (
+                            {pinCodesData?.data.map((pinCode) => (
                               <CommandItem
                                 value={String(pinCode.code)}
                                 key={pinCode.id}
@@ -330,7 +369,7 @@ const SignUpFormUser = () => {
               />
               <div className="py-4 space-y-2 flex flex-col">
                 <Button type="submit" className="w-full xl:w-1/2">
-                  Sign Up
+                  {isLoading ? "Processing..." : "Sign Up"}
                 </Button>
               </div>
             </form>
@@ -341,4 +380,4 @@ const SignUpFormUser = () => {
   );
 };
 
-export default SignUpFormUser;
+export default SignUpFormCustomer;
