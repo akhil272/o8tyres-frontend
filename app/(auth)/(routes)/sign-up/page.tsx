@@ -34,7 +34,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="flex flex-col xl:py-10 py-2 justify-center h-full px-4 md:px-8">
+    <div>
       <h1 className="text-2xl font-bold">Sign Up</h1>
       <p>
         Have an account?{" "}
@@ -42,7 +42,7 @@ const SignUpPage = () => {
           Sign In
         </Link>
       </p>
-      <div className="xl:py-20 py-4 w-full">
+      <div className="py-4 w-full">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -152,7 +152,7 @@ const SignUpPage = () => {
             </div>
 
             <div className="py-4 space-y-2 flex flex-col">
-              <Button className="w-full" type="submit">
+              <Button className="w-full xl:w-1/2" type="submit">
                 Continue
               </Button>
             </div>

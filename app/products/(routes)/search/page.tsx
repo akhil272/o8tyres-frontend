@@ -21,14 +21,56 @@ const SearchPage = () => {
     return <p>Error</p>;
   }
   const tyreProducts = data?.data.tyreProducts;
+  const brands = data?.data.tyreProducts.reduce(
+    (acc: { id: number; name: string }[], item) => {
+      // Check if the brand is already in the accumulator
+      const found = acc.some((el) => el.name === item.pattern.brand.name);
+      if (!found) {
+        // If not found, add it to the accumulator
+        acc.push({ id: item.pattern.brand.id, name: item.pattern.brand.name });
+      }
+      return acc;
+    },
+    []
+  );
+  const patterns = data?.data.tyreProducts.reduce(
+    (acc: { id: number; name: string }[], item) => {
+      // Check if the brand is already in the accumulator
+      const found = acc.some((el) => el.name === item.pattern.name);
+      if (!found) {
+        // If not found, add it to the accumulator
+        acc.push({ id: item.pattern.id, name: item.pattern.name });
+      }
+      return acc;
+    },
+    []
+  );
+
   return (
-    <div>
+    <div className="bg-secondary h-full py-10 px-8">
       <div className="flex space-x-8 ">
         <div className="hidden lg:flex">
           <div className="font-medium text-2xl flex">
             <div>
               <div className="pb-4">Filters</div>
-              <div className="w-80 bg-background rounded-lg h-40"></div>
+              <div className="w-80 space-y-4 font-normal text-lg p-4 bg-background rounded-lg h-40">
+                <div>
+                  <h4 className="font-semibold">Brands</h4>
+                  <ul>
+                    {brands?.map((item) => (
+                      <li key={item.id}>{item.name}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold">Patterns</h4>
+                  <ul>
+                    {patterns?.map((item) => (
+                      <li key={item.id}>{item.name}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>

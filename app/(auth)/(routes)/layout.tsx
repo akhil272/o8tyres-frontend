@@ -7,7 +7,7 @@ export default function AuthLayout({
 }) {
   return (
     <section>
-      <div className="bg-zinc-100 xl:px-8 xl:py-12 h-[100svh] items-center justify-center flex">
+      <div className="bg-secondary xl:px-8 xl:py-12 justify-center flex">
         <div className="xl:flex bg-white  xl:rounded-lg xl:h-[70svh] h-full xl:w-[50svw]">
           <div className="flex flex-col xl:w-1/3 bg-primary px-4 xl:py-8 pt-8 text-white xl:h-full justify-evenly xl:rounded-lg">
             <h5 className="text-base font-bold hidden xl:block">O8 TYRES</h5>
@@ -29,7 +29,9 @@ export default function AuthLayout({
               </div>
             </div>
           </div>
-          <div className="xl:w-2/3 w-full">{children}</div>
+          <main className="flex flex-col justify-center xl:w-2/3 w-full xl:py-10 py-4 px-4 md:px-8 ">
+            {children}
+          </main>
         </div>
       </div>
     </section>

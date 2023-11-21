@@ -84,7 +84,7 @@ const SignInPage = () => {
   };
 
   return (
-    <div className="flex flex-col xl:py-10 py-2 justify-center h-full px-4 md:px-8">
+    <div>
       <h1 className="text-2xl font-bold">Sign In</h1>
       <p>Enter your credentials to access your account</p>
       <div className="xl:py-20 py-4 lg:w-1/2 w-full">

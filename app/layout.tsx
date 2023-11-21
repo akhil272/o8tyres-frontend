@@ -22,9 +22,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={nunito.className}>
         <Providers>
-          <Navbar />
-          {children}
-          <Footer />
+          <section className="flex flex-col h-[100svh] justify-between ">
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </section>
         </Providers>
         <Toaster />
       </body>
