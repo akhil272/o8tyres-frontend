@@ -59,11 +59,11 @@ const MenuItemSheet = ({ routes }: MenuItemSheetProps) => {
           <SheetHeader>
             <SheetTitle className="text-white justify-end flex">
               {user && (
-                <div className="py-2  border-b-2">
-                  <text className="font-light text-2xl">Hello, </text>
-                  <text className="font-semibold text-2xl">
+                <div className="py-2 border-b-2">
+                  <label className="font-light text-2xl">Hello, </label>
+                  <label className="font-semibold text-2xl">
                     {user.username}
-                  </text>
+                  </label>
                 </div>
               )}
             </SheetTitle>
