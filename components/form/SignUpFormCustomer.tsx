@@ -114,7 +114,7 @@ const SignUpFormCustomer = () => {
           duration: 3000,
         });
         if (cart.length > 0) {
-          router.push("/checkout");
+          router.push("/orders/checkout");
         } else router.push("/");
       }
     } catch (error) {
