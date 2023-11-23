@@ -14,11 +14,7 @@ export type ErrorResponse = {
   status: number;
   data: {
     statusCode: number;
-    message: string;
-    errors: [
-      {
-        message: string;
-      }
-    ];
+    message: string | string[];
+    error: string;
   };
 };
