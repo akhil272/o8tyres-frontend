@@ -87,7 +87,7 @@ const HomePage = () => {
                 />
               )}
             </div>
-            <Button onClick={onClickContinue} className="w-full xl:w-1/2 ">
+            <Button onClick={onClickContinue} className="w-full xl:w-1/2 z-30 ">
               Continue
             </Button>
           </div>

@@ -47,7 +47,7 @@ export function SearchBar({
   };
 
   return (
-    <div>
+    <div className="relative">
       <Input
         className="bg-secondary border-none "
         type="text"
@@ -71,7 +71,7 @@ export function SearchBar({
           </div>
         </div>
       )}
-      <div>
+      <div className="min-w-full z-10 absolute overflow-auto max-h-44">
         {data
           .filter((item) => {
             const searchTerm = userQuery.toLowerCase();
@@ -82,10 +82,10 @@ export function SearchBar({
               dataName !== searchTerm
             );
           })
-          .slice(0, 5)
+          // .slice(0, 5) show only 5 items
           .map((item) => (
             <div
-              className="py-2 px-2 bg-secondary hover:bg-white"
+              className="py-2 px-2  bg-secondary hover:bg-white hover:bg-primary hover:text-white"
               onClick={() => onSearch(item)}
               key={item.value}
             >

@@ -55,7 +55,7 @@ const TyreProductCard = ({ tyreProduct }: TyreProductProps) => {
       <div className="flex justify-between space-x-4 h-14">
         <input
           onChange={(e) => setQuantity(Number(e.target.value))}
-          defaultValue={4}
+          defaultValue={1}
           min={1}
           max={30}
           type="number"
