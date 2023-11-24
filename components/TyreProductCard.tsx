@@ -14,7 +14,7 @@ interface TyreProductProps {
 const TyreProductCard = ({ tyreProduct }: TyreProductProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [quantity, setQuantity] = useState<number>(4);
+  const [quantity, setQuantity] = useState<number>(1);
   const onClickAddToCart = (tyreProduct: TyreProduct, quantity: number) => {
     dispatch(addToCart({ ...tyreProduct, cartQuantity: quantity }));
   };

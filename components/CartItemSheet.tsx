@@ -13,7 +13,6 @@ import { ShoppingCart } from "lucide-react";
 import { useAppSelector } from "@/redux/hooks";
 import CartLineItem from "./CartLineItem";
 import { useRouter } from "next/navigation";
-import { Label } from "./ui/label";
 
 const CartItemSheet = () => {
   const cart = useAppSelector((state) => state.cart.cart);

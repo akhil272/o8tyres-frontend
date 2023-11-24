@@ -15,7 +15,7 @@ import { useParams, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
 const ProductPage = () => {
-  const [quantity, setQuantity] = React.useState<number>(4);
+  const [quantity, setQuantity] = React.useState<number>(1);
   const router = useRouter();
   const { id } = useParams();
   const dispatch = useAppDispatch();
