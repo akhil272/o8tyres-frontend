@@ -85,7 +85,7 @@ export function SearchBar({
           // .slice(0, 5) show only 5 items
           .map((item) => (
             <div
-              className="py-2 px-2  bg-secondary hover:bg-white hover:bg-primary hover:text-white"
+              className="py-2 px-2 bg-secondary hover:bg-primary hover:text-white"
               onClick={() => onSearch(item)}
               key={item.value}
             >
