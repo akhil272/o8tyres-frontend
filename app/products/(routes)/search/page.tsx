@@ -2,6 +2,8 @@
 import TyreProductCard from "@/components/TyreProductCard";
 import { useFindTyreProductsQuery } from "@/redux/services/productApi";
 import { useSearchParams } from "next/navigation";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 const SearchPage = () => {
   const searchParams = useSearchParams();
@@ -9,7 +11,7 @@ const SearchPage = () => {
   const tyreSize = searchParams.get("tyreSizeId");
   const { data, isLoading, isError, error } = useFindTyreProductsQuery({
     page: 1,
-    size: 1,
+    size: 10,
     vehicleModelId: Number(vehicleModel),
     tyreSizeId: Number(tyreSize),
   });
@@ -53,20 +55,34 @@ const SearchPage = () => {
           <div className="font-medium text-2xl flex">
             <div>
               <div className="pb-4">Filters</div>
-              <div className="w-80 space-y-4 font-normal text-lg p-4 bg-background rounded-lg h-40">
+              <div className="w-80 space-y-4 font-normal text-lg p-4 bg-background rounded-lg ">
                 <div>
                   <h4 className="font-semibold">Brands</h4>
                   <ul>
+                    <li className="flex gap-2 items-center">
+                      <Checkbox checked />
+                      <Label className="text-base"> All</Label>
+                    </li>
                     {brands?.map((item) => (
-                      <li key={item.id}>{item.name}</li>
+                      <li className="flex gap-2 items-center" key={item.id}>
+                        <Checkbox />
+                        <Label className="text-base">{item.name}</Label>
+                      </li>
                     ))}
                   </ul>
                 </div>
                 <div>
                   <h4 className="font-semibold">Patterns</h4>
                   <ul>
+                    <li className="flex gap-2 items-center">
+                      <Checkbox checked />
+                      <Label className="text-base"> All</Label>
+                    </li>
                     {patterns?.map((item) => (
-                      <li key={item.id}>{item.name}</li>
+                      <li className="flex gap-2 items-center" key={item.id}>
+                        <Checkbox />
+                        <Label className="text-base">{item.name}</Label>
+                      </li>
                     ))}
                   </ul>
                 </div>
